@@ -1,6 +1,8 @@
+//Using data models from schema.cds and common.cds 
 using { AssetManagement.db as database } from '/home/user/projects/AssetManagement/db/schema.cds';
 using { AssetManagement.common as common } from '../db/common';
 
+//Services for Admin specific roles
 service AssetAdminService @(requires:'Admin') {
 
     entity EmployeeSrv as projection on database.master.Employees;
@@ -14,6 +16,7 @@ service AssetAdminService @(requires:'Admin') {
     entity ArchiveRecordSrv as projection on database.transactional.ArchiveRecords;
     entity AssetAssignmentSrv as projection on database.transactional.AssetAssignments;
 
+    //Dashboard kpi's
     type DashboardKPI {
     totalAssets      : Integer;
     assignedAssets   : Integer;
@@ -27,16 +30,18 @@ service AssetAdminService @(requires:'Admin') {
     //KPI - actions
     action getDashboardKPIs() returns DashboardKPI;
     
+    //Department chart vs Asset
     type DepartmentChart {
     department : String;
     count      : Integer;
 }
 
+//action to fetch assets by dept
 action getAssetsByDepartment() returns array of DepartmentChart;
 
-    action whoAmI() returns String;
+//action whoAmI() returns String;
 
-
+//Downloading and emailing options
     action exportReportToPDF(
         reportType : String,
         filters : String
@@ -247,6 +252,7 @@ action getAssetsByDepartment() returns array of DepartmentChart;
     )returns array of ArchiveRecordSrv;
 }
 
+//Services for User specific roles(Mostly read only)
 service AssetUserService @(requires:'User') {
 
     entity AssetSrv as projection on database.master.Assets;
@@ -254,6 +260,7 @@ service AssetUserService @(requires:'User') {
     entity OwnershipLedgerSrv as projection on database.transactional.OwnershipLedgers;
 }
 
+//Services for Manager specific roles
 service AssetManagerService @(requires:'Manager') {
 
     entity AssetSrv as projection on database.master.Assets;
@@ -264,6 +271,7 @@ service AssetManagerService @(requires:'Manager') {
     entity OwnershipLedgerSrv as projection on database.transactional.OwnershipLedgers;
     entity MaintenanceRecordSrv as projection on database.transactional.MaintenanceRecords;
 
+    //Kpi's
     action getDashboardKPIs() returns String;
 
     action exportReportToPDF(
