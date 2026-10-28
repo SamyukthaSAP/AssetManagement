@@ -1,3 +1,4 @@
+//checking if odata services are working fine
 ###
 POST http://localhost:4004/odata/v4/asset-admin/whoAmI
 
