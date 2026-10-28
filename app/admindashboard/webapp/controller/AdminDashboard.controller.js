@@ -385,7 +385,41 @@ _loadAssetsPerDepartment: async function () {
     } catch (error) {
         console.error("Error loading department chart:", error);
     }
-}
+},
+_loadRequests: async function () {
+    try {
+        const items = await this._fetchList(
+            "AssetRequestSrv?$expand=employee,asset_category&$filter=status eq 'pending'"
+        );
+        this.getView().setModel(new JSONModel({ items }), "requests");
+    } catch (e) {
+        console.error("Requests load error:", e);
+    }
+},
+
+_decide: async function (oEvent, sStatus) {
+    const req = oEvent.getSource().getBindingContext("requests").getObject();
+    try {
+        const response = await fetch(
+            "/odata/v4/asset-admin/AssetRequestSrv(" + req.request_id + ")",
+            {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: sStatus })
+            }
+        );
+        if (!response.ok) {
+            throw new Error("Update failed with status " + response.status);
+        }
+        sap.m.MessageToast.show("Request " + sStatus);
+        this._loadRequests();
+    } catch (e) {
+        console.error("Decision error:", e);
+    }
+},
+
+onApprove: function (oEvent) { this._decide(oEvent, "approved"); },
+onReject:  function (oEvent) { this._decide(oEvent, "rejected"); },
 
 
     });

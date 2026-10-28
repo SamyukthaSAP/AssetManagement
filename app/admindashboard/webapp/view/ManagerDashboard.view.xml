@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="admindashboard.controller.AdminDashboard"
+    controllerName="admindashboard.controller.ManagerDashboard"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
     xmlns:viz="sap.viz.ui5.controls"
@@ -10,8 +10,6 @@
     title="Manager Dashboard">
     
         <content>
-        <Text id="textmanager"
-        text="THIS IS MANAGER DASHBOARD"/>
             <HBox id="kpiContainer"
                 justifyContent="SpaceAround"
                 wrap="Wrap">
@@ -86,101 +84,110 @@
         </TileContent>
     </tileContent>
 </GenericTile>
-<GenericTile id="tileVendor" header="Vendors">
-    <tileContent>
-        <TileContent id="tileVend">
-            <content>
-                <NumericContent
-                    id="numericVendor"
-                    value="{kpi>/vendors}"/>
-            </content>
-        </TileContent>
-    </tileContent>
-</GenericTile>
-<GenericTile
-    id="tileDepartments"
-    header="Departments">
-
-    <tileContent>
-        <TileContent id="tileContentDepartments">
-            <content>
-                <NumericContent
-                    id="numericDepartments"
-                    value="{kpi>/departments}"/>
-            </content>
-        </TileContent>
-    </tileContent>
-
-</GenericTile>
-
             </HBox>
+<HBox width="100%" justifyContent="SpaceBetween" renderType="Bare">
 
+    <Panel id="assetStatusPanel" headerText="Asset Status Overview"
+           expandable="true" expanded="true" width="49%">
+        <viz:VizFrame id="assetStatusChart" vizType="donut"
+            width="100%" height="350px"
+            uiConfig="{applicationSet:'fiori'}"
+            vizProperties="{title: {visible: false}}">
+            <!-- dataset and feeds exactly as before -->
+            <viz:dataset>
+            <viz.data:FlattenedDataset data="{chart>/items}">
+                <viz.data:dimensions>
+                    <viz.data:DimensionDefinition name="Status" value="{chart>Status}"/>
+                </viz.data:dimensions>
+                <viz.data:measures>
+                    <viz.data:MeasureDefinition name="Count" value="{chart>Count}"/>
+                </viz.data:measures>
+            </viz.data:FlattenedDataset>
+        </viz:dataset>
+        <viz:feeds>
+            <viz.feeds:FeedItem uid="size" type="Measure" values="Count"/>
+            <viz.feeds:FeedItem uid="color" type="Dimension" values="Status"/>
+        </viz:feeds>
+        </viz:VizFrame>
+    </Panel>
+
+    <Panel id="departmentPanel" headerText="Assets by Category"
+           expandable="true" expanded="true" width="49%">
+        <viz:VizFrame id="departmentChart" vizType="column"
+            width="100%" height="350px"
+            uiConfig="{applicationSet:'fiori'}"
+            vizProperties="{title: {visible: false}}">
+            <!-- dataset and feeds exactly as before -->
+            <viz:dataset>
+            <viz.data:FlattenedDataset data="{deptChart>/items}">
+                <viz.data:dimensions>
+                    <viz.data:DimensionDefinition name="Category" value="{deptChart>label}"/>
+                </viz.data:dimensions>
+                <viz.data:measures>
+                    <viz.data:MeasureDefinition name="Assets" value="{deptChart>count}"/>
+                </viz.data:measures>
+            </viz.data:FlattenedDataset>
+        </viz:dataset>
+        <viz:feeds>
+            <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Assets"/>
+            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Category"/>
+        </viz:feeds>
+        </viz:VizFrame>
+    </Panel>
+
+</HBox>
+<Panel id="employeePanel" headerText="IT Department Employees"
+       expandable="true" expanded="true">
+    <Table id="employeeTable" items="{empModel>/items}" growing="true" growingThreshold="10">
+        <headerToolbar>
+            <OverflowToolbar>
+                <Title text="Employees"/>
+                <ToolbarSpacer/>
+                <SearchField width="15rem" placeholder="Search name..."
+                             liveChange=".onEmployeeSearch"/>
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+            <Column><Text text="Name"/></Column>
+            <Column><Text text="Email"/></Column>
+            <Column><Text text="Phone"/></Column>
+            <Column><Text text="Location"/></Column>
+            <Column><Text text="Status"/></Column>
+            <Column><Text text="Action"/></Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{empModel>full_name}"/>
+                    <Text text="{empModel>email}"/>
+                    <Text text="{empModel>phone}"/>
+                    <Text text="{empModel>location}"/>
+                    <ObjectStatus text="{empModel>status}"/>
+                    <Button text="Raise Ticket" icon="sap-icon://add" press=".onRaiseTicket"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</Panel>
         </content>
-        <Panel
-    id="assetStatusPanel"
-    headerText="Asset Status Overview"
-    expandable="true"
-    expanded="true">
+<Panel id="reportPanel" headerText="Reports &amp; Export"
+       expandable="true" expanded="true">
 
-    <viz:VizFrame
-    id="assetStatusChart"
-    vizType="donut"
-    width="100%"
-    height="400px"/>
+    <HBox id="reportButtons" alignItems="Center" wrap="Wrap">
+        <Button id="Bii" text="Export Report PDF"
+                icon="sap-icon://pdf-attachment"
+                press=".onExportPDF"
+                class="sapUiSmallMarginEnd"/>
 
-</Panel>
-<Panel
-    id="departmentPanel"
-    headerText="Assets by Department">
+        <Button id="hi" text="Download Report"
+                icon="sap-icon://download"
+                press=".onDownloadReport"
+                class="sapUiSmallMarginEnd"/>
 
-    <viz:VizFrame
-    id="departmentChart"
-    vizType="column"
-    width="100%"
-    height="400px"/>
-
-</Panel>
-<Panel
-    id="categoryPanel"
-    headerText="Assets by Category"
-    expandable="true"
-    expanded="true">
-
-    <Text id="textcha"
-    text="Category Chart Coming Soon"/>
-
-</Panel>
-<Panel
-    id="maintenancePanel"
-    headerText="Maintenance Status"
-    expandable="true"
-    expanded="true">
-
-    <Text id="Tectsvj"
-    text="Maintenance Status Chart Coming Soon"/>
-
-</Panel>
-<Panel
-    id="reportPanel"
-    headerText="Reports  &amp; Export"
-    expandable="true"
-    expanded="true">
-
-    <VBox id="Vboc">
-
-        <Button id="Bii"
-            text="Export Report PDF"
-            press=".onExportPDF"/>
-
-        <Button id="hi"
-            text="Download Report"
-            press=".onDownloadReport"/>
-
-        <Button id="ksjhd"
-            text="Email Report"
-            press=".onEmailReport"/>
-
-    </VBox>
+        <Button id="ksjhd" text="Email Report"
+                icon="sap-icon://email"
+                press=".onEmailReport"/>
+    </HBox>
 
 </Panel>
     </Page>

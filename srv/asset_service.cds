@@ -268,6 +268,7 @@ service AssetManagerService @(requires:'Manager') {
     entity AssetSrv as projection on database.master.Assets;
     entity EmployeeSrv as projection on database.master.Employees;
     entity DepartmentSrv as projection on database.master.Departments;
+    entity AssetCategorySrv as projection on database.master.AssetCategories;
 
     entity AssetAssignmentSrv as projection on database.transactional.AssetAssignments;
     entity OwnershipLedgerSrv as projection on database.transactional.OwnershipLedgers;

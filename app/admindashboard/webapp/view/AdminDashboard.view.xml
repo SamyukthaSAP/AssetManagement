@@ -147,6 +147,32 @@
 </GenericTile>
                                         </items>
                                     </HBox>
+                                    <Panel headerText="Pending Asset Requests" expandable="true" expanded="true">
+    <Table items="{requests>/items}" noDataText="No pending requests">
+        <columns>
+            <Column><Text text="Employee"/></Column>
+            <Column><Text text="Category"/></Column>
+            <Column><Text text="Remarks"/></Column>
+            <Column><Text text="Requested"/></Column>
+            <Column><Text text="Action"/></Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{requests>employee/full_name}"/>
+                    <Text text="{requests>asset_category/name}"/>
+                    <Text text="{requests>remarks}"/>
+                    <Text text="{requests>requested_date}"/>
+                    <HBox>
+                        <Button text="Approve" type="Accept" press=".onApprove"
+                                class="sapUiTinyMarginEnd"/>
+                        <Button text="Reject" type="Reject" press=".onReject"/>
+                    </HBox>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</Panel>
                                     <HBox
     width="100%"
     justifyContent="SpaceBetween"
@@ -206,7 +232,6 @@
             </viz:VizFrame>
 
         </content>
-
     </Panel>
 
     <!-- Department Chart -->
