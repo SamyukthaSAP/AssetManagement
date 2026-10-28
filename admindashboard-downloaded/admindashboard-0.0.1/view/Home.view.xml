@@ -1,0 +1,43 @@
+<mvc:View
+    controllerName="admindashboard.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page id="Paget" 
+    title="IT Asset Lifecycle Management">
+
+        <content>
+
+            <VBox id="Vboxt"
+                alignItems="Center"
+                justifyContent="Center"
+                class="sapUiLargeMargin">
+
+                <Title id="Title"
+                    text="Asset Management Portal"/>
+
+                <Button id="B1"
+                    text="Admin Login"
+                    press=".onAdminPress"
+                    width="250px"
+                    class="sapUiSmallMargin"/>
+
+                <Button id="B2"
+                    text="Manager Login"
+                    press=".onManagerPress"
+                    width="250px"
+                    class="sapUiSmallMargin"/>
+
+                <Button id="B3"
+                    text="User"
+                    press=".onUserPress"
+                    width="250px"
+                    class="sapUiSmallMargin"/>
+
+            </VBox>
+
+        </content>
+
+    </Page>
+
+</mvc:View>

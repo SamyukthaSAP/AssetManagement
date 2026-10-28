@@ -1,0 +1,118 @@
+<mvc:View
+    controllerName="admindashboard.controller.AdminDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+
+    <Page id="managerDashboardPage"
+    title="Admin Dashboard">
+    
+        <content>
+
+            <HBox id="kpiContainerM"
+                justifyContent="SpaceAround"
+                wrap="Wrap">
+
+                <GenericTile id="tileTotalAsset"
+                header="Total Assets">
+                    <tileContent>
+                        <TileContent id="tileContentTota">
+                            <content>
+                                <NumericContent id="numericTotalAsset"
+                                value="{kpi>/totalAssets}"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile id="tileAssignedAsset"
+                header="Assigned Assets">
+                    <tileContent>
+                        <TileContent id="TileAssigne">
+                            <content>
+                                <NumericContent id="numericAssigne"
+                                value="{kpi>/assignedAssets}"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile id="tileRepairAsses"
+                header="In Repair Assets">
+                    <tileContent>
+                        <TileContent id="tileRepai">
+                            <content>
+                                <NumericContent id="numericvl"
+                                 value="{kpi>/repairAssets}"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile id="tileReti" header="Retired">
+    <tileContent>
+        <TileContent id="tileContentRetir">
+            <content>
+                <NumericContent
+                    id="numericRetir"
+                    value="{kpi>/retiredAssets}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile id="tileArchive" header="Archived Assets">
+    <tileContent>
+        <TileContent id="tileContentArchive">
+            <content>
+                <NumericContent
+                    id="numericArchive"
+                    value="{kpi>/archivedAssets}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+<GenericTile id="tileEmploye" header="Active Employees">
+    <tileContent>
+        <TileContent id="tileEm">
+            <content>
+                <NumericContent
+                    id="numericEmploye"
+                    value="{kpi>/employees}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+<GenericTile id="tileVendo" header="Vendors">
+    <tileContent>
+        <TileContent id="tileVen">
+            <content>
+                <NumericContent
+                    id="numericendor"
+                    value="{kpi>/vendors}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+            </HBox>
+
+        </content>
+        <Panel
+    id="assetStatusPane"
+    headerText="Asset Status Overview"
+    expandable="true"
+    expanded="true">
+
+    <viz:VizFrame
+    id="assetStatusChat"
+    vizType="donut"
+    width="100%"
+    height="400px"/>
+
+</Panel>
+    </Page>
+
+</mvc:View>

@@ -1,0 +1,187 @@
+{
+  "_version": "1.89.0",
+  "sap.app": {
+    "id": "assetlistpage",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.33.0",
+      "toolsId": "3c6b3007-5c59-4e63-a9ec-277cbff19db1"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/asset-admin/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+"crossNavigation": {
+  "inbounds": {
+    "Asset-manage": {
+      "semanticObject": "Asset",
+      "action": "manage",
+      "title": "{{appTitle}}",
+      "signature": {
+        "parameters": {},
+        "additionalParameters": "allowed"
+      }
+    }
+  }
+}
+    
+  },
+  "sap.cloud": {
+  "public": true,
+  "service": "AssetManagement"
+},
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.153.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "assetlistpage.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "AssetSrvList",
+          "target": "AssetSrvList"
+        },
+        {
+          "pattern": "AssetSrv({key}):?query:",
+          "name": "AssetSrvObjectPage",
+          "target": "AssetSrvObjectPage"
+        },
+        {
+          "pattern": "AssetSrv({key})/assignments({key2}):?query:",
+          "name": "AssetAssignmentSrvObjectPage",
+          "target": "AssetAssignmentSrvObjectPage"
+        }
+      ],
+      "targets": {
+        "AssetSrvList": {
+          "type": "Component",
+          "id": "AssetSrvList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/AssetSrv",
+              "hideBasicSearch": true,
+              "navigation": {
+                "AssetSrv": {
+                  "detail": {
+                    "route": "AssetSrvObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "tableSettings": {
+                    "type": "ResponsiveTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "AssetSrvObjectPage": {
+          "type": "Component",
+          "id": "AssetSrvObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/AssetSrv",
+              "navigation": {
+                "assignments": {
+                  "detail": {
+                    "route": "AssetAssignmentSrvObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "AssetAssignmentSrvObjectPage": {
+          "type": "Component",
+          "id": "AssetAssignmentSrvObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/AssetSrv/assignments"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  },
+  "sap.fe": {
+    "app": {
+      "enableLazyLoading": true
+    }
+  }
+}

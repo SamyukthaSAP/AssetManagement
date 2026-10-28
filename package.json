@@ -1,0 +1,68 @@
+{
+  "name": "AssetManagement",
+  "version": "1.0.0",
+  "dependencies": {
+    "@cap-js/hana": "^3.1.2",
+    "@sap/cds": "^10.1.1",
+    "@sap/xsenv": "^4",
+    "@sap/xssec": "^4"
+  },
+  "devDependencies": {
+    "@sap-ux/eslint-plugin-fiori-tools": "^10.17.3",
+    "@sap/cds-dk": "^9",
+    "cds-plugin-ui5": "^0.17.0",
+    "mbt": "^1.2.49",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-assetmanagementapp": "cds watch --open assetmanagementapp/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-assetlistpage": "cds watch --open assetlistpage/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy AssetManagement --delete-services --delete-service-keys --delete-service-brokers",
+    "watch-departmentlistreportpage": "cds watch --open departmentlistreportpage/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-employeelistreportpage": "cds watch --open employeelistreportpage/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-vendorlistreportpage": "cds watch --open vendorlistreportpage/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-assetcategorylistreport": "cds watch --open assetcategorylistreport/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-admindashboard": "cds watch --open admindashboard/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-userasset": "cds watch --open userasset/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-assetassignment": "cds watch --open assetassignment/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-ownershipledger": "cds watch --open ownershipledger/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-maintenance": "cds watch --open maintenance/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-archive": "cds watch --open archive/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/assetmanagementapp",
+    "app/assetlistpage",
+    "app/assetlistpage",
+    "app/assetlistpage",
+    "app/departmentlistreportpage",
+    "app/employeelistreportpage",
+    "app/vendorlistreportpage",
+    "app/assetcategorylistreport",
+    "app/userasset",
+    "app/assetassignment",
+    "app/ownershipledger",
+    "app/maintenance",
+    "app/archive"
+  ],
+  "cds": {
+    "requires": {
+      "auth": {
+        "[development]": {
+          "kind": "dummy"
+        },
+        "[production]": "xsuaa"
+      },
+      "html5-repo": true
+    }
+  },
+  "allowScripts": {
+    "mbt@1.2.49": true,
+    "better-sqlite3": true
+  }
+}

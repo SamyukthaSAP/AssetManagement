@@ -1,0 +1,115 @@
+###
+POST http://localhost:4004/odata/v4/asset-admin/whoAmI
+
+
+content
+GET http://localhost:4004/odata/v4/asset-management/EmployeeSrv?$expand=dept
+
+###
+GET http://localhost:4004/odata/v4/asset-management/DepartmentSrv
+
+###
+GET http://localhost:4004/odata/v4/asset-management/AssetSrv?$expand=current_holder_id
+
+###
+GET http://localhost:4004/odata/v4/asset-management/VendorSrv
+
+###
+GET http://localhost:4004/odata/v4/asset-management/AssetCategorySrv
+
+
+###
+GET http://localhost:4004/odata/v4/asset-management/AssetAssignmentSrv?$expand=asset,employee
+
+###
+GET http://localhost:4004/odata/v4/asset-management/OwnershipLedgerSrv?$expand=asset,to_employee_id
+
+###
+GET http://localhost:4004/odata/v4/asset-management/MaintenanceRecordSrv?$expand=asset,service
+
+###
+GET http://localhost:4004/odata/v4/asset-management/ArchiveRecordsSrv?$expand=asset
+
+###
+POST http://localhost:4004/odata/v4/asset-management/addEmployee
+Content-Type: application/json
+
+{
+    "employee_id": "emp00011-0000-0000-0000-000000000011",
+        "full_name": "Rondla Samyuktha",
+        "email": "rondlasamyuktha@gmail.com",
+        "phone": "12345678910",
+        "location": "Benguluru",
+        "status": "active",
+        "dept_dept_id": "11111111-1111-1111-1111-111111111111"
+}
+
+###
+POST http://localhost:4004/odata/v4/asset-management/editEmployee
+Content-Type: application/json
+
+{
+    "employee_id": "emp00011-0000-0000-0000-000000000011",
+        "location": "Hyderabad",
+        "full_name": "Rondla Samyuktha",
+        "email": "rondlasamyuktha@gmail.com",
+        "phone": "12345678910",
+        "status": "active",
+        "dept_dept_id": "11111111-1111-1111-1111-111111111111"
+}
+
+###
+POST http://localhost:4004/odata/v4/asset-management/createAsset
+Content-Type: application/json
+
+{
+    "asset_id" : "ast00013-0000-0000-0000-000000000013",
+    "asset_tag": "MON003" ,
+    "serial_number": "SN1012",
+    "model": "Dell 32 Inch",
+    "purchase_date": "2023-06-01",
+    "purchase_cost": "22000",
+    "warranty_expiry": "2027-01-04",
+    "first_distribution_date":null,
+    "status": null,
+    "asset_category_asset_category_id": "ac000003-0000-0000-0000-000000000003",
+    "vendor_vendor_id": "vd000001-0000-0000-0000-000000000001",
+    "current_holder_id_employee_id": null
+}
+
+###
+POST http://localhost:4004/odata/v4/asset-management/createAsset
+Content-Type: application/json
+
+{
+    "asset_id" : "ast00013-0000-0000-0000-000000000013",
+    "asset_tag": "MON003" ,
+    "serial_number": "SN1012",
+    "model": "Dell 32 Inch",
+    "purchase_date": "2023-06-01",
+    "purchase_cost": "22000",
+    "warranty_expiry": "2027-01-04",
+    "first_distribution_date":null,
+    "status": null,
+    "asset_category_asset_category_id": "ac000003-0000-0000-0000-000000000003",
+    "vendor_vendor_id": "vd000001-0000-0000-0000-000000000001",
+    "current_holder_id_employee_id": null
+}
+
+###
+POST http://localhost:4004/odata/v4/asset-management/assignAsset
+Content-Type: application/json
+
+{
+    "assignment_id": "asg00010-0000-0000-0000-000000000011",
+    "assigned_date": "2023-10-05T10:00:00.000Z",
+    "expected_return_date": null,
+    "actual_return_date": null,
+    "assignment_status": null,
+    "remarks": null,
+    "asset_asset_id": "ast00003-0000-0000-0000-000000000003",
+    "employee_employee_id": "emp00011-0000-0000-0000-000000000011",
+    "assigned_by_employee_id": "emp00001-0000-0000-0000-000000000001"
+}
+
+

@@ -1,0 +1,357 @@
+<mvc:View
+    controllerName="admindashboard.controller.AdminDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:f="sap.ui.layout.form">
+
+    <Page id="myadminDashboardPage" title="Admin Dashboard" class="sapUiContentPadding" enableScrolling="false">
+        <content>
+            
+            <!-- Main Split Layout (Left Sidebar + Right Content Area) -->
+            <layout:Splitter id='mys1' height="100%" width="100%" class="fixedSplitter">
+                
+                <!-- LEFT SIDEBAR: Navigation Panel -->
+                <layout:contentAreas>
+                    <VBox id='vb1' class="sidebarPanel sapUiSmallMargin">
+                        <layoutData>
+                        <layout:SplitterLayoutData id="hia" size="280px" resizable="false"/>
+    </layoutData>
+                        <Title id="t1" text="Navigation" titleStyle="H5" class="sapUiTinyMarginBottom"/>
+                        
+                        <List id="l1" mode="SingleSelectMaster" selectionChange="onNavSelectionChange">
+                            <items>
+                                <StandardListItem id="S1" title="Dashboard Overview" icon="sap-icon://dashboard" selected="true"/>
+                                <StandardListItem id="S2" title="Asset Details" icon="sap-icon://product"/>
+                                <StandardListItem id="S3" title="Asset Category Details" icon="sap-icon://repair"/>
+                                <StandardListItem id="S4" title="Vendors Details" icon="sap-icon://repair"/>
+                                <StandardListItem id="S5" title="Asset Assignment Details" icon="sap-icon://repair"/>
+                                <StandardListItem id="S6" title="Maintenance Details" icon="sap-icon://repair"/>
+                                <StandardListItem id="S7" title="Employee Details" icon="sap-icon://repair"/>
+                                <StandardListItem id="S8" title="Department Details" icon="sap-icon://repair"/>
+                                <StandardListItem id="S9" title="Ownership Ledger" icon="sap-icon://repair"/>
+                                <StandardListItem id="S10" title="Archive" icon="sap-icon://repair"/>
+                            </items>
+                        </List>
+                    </VBox>
+
+                    <!-- RIGHT CONTENT AREA: Dynamic Switcher Container -->
+                    <NavContainer id="adminNavContainer">
+                        <layoutData>
+        <layout:SplitterLayoutData size="auto"/>
+    </layoutData>
+                        <!-- PAGE 1: The Dashboard Overview (KPIs + Chart) -->
+                        <pages>
+                            <Page id="dashboardOverviewPage" showHeader="false">
+                                <content>
+                                    <!-- KPI Compact Tiles -->
+                                    <HBox id="kpiContainerM" justifyContent="Start" wrap="Wrap" class="sapUiSmallMarginBottom" width="100%">
+                                        <items>
+                                            <VBox id='vb2' class="kpiCompactCard">
+                                                <HBox id="hb1" justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label id="l2" text="Total Assets" design="Bold"/>
+                                                    <core:Icon id="ci1" src="sap-icon://product" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text id="hih" text="{kpi>/totalAssets}" class="kpiValue"/>
+                                            </VBox>
+
+                                            <VBox id="jdhb" class="kpiCompactCard">
+                                                <HBox id="ksjd" justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label id="nks" text="Assigned" design="Bold"/>
+                                                    <core:Icon id="akjd" src="sap-icon://employee-approvals" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text id="sdjfks" text="{kpi>/assignedAssets}" class="kpiValue"/>
+                                            </VBox>
+
+                                            <VBox id="dkjf" class="kpiCompactCard">
+                                                <HBox id="sdkjf" justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label id="skjf" text="In Repair" design="Bold"/>
+                                                    <core:Icon id="sljf" src="sap-icon://repair" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text id="slkj" text="{kpi>/repairAssets}" class="kpiValue"/>
+                                            </VBox>
+
+                                            <VBox class="kpiCompactCard">
+                                                <HBox justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label text="Retired" design="Bold"/>
+                                                    <core:Icon src="sap-icon://decline" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text text="{kpi>/retiredAssets}" class="kpiValue"/>
+                                            </VBox>
+
+                                            <VBox class="kpiCompactCard">
+                                                <HBox justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label text="Archived" design="Bold"/>
+                                                    <core:Icon src="sap-icon://archive" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text text="{kpi>/archivedAssets}" class="kpiValue"/>
+                                            </VBox>
+
+                                            <VBox class="kpiCompactCard">
+                                                <HBox justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label text="Employees" design="Bold"/>
+                                                    <core:Icon src="sap-icon://group" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text text="{kpi>/employees}" class="kpiValue"/>
+                                            </VBox>
+
+                                            <VBox class="kpiCompactCard">
+                                                <HBox justifyContent="SpaceBetween" alignItems="Center">
+                                                    <Label text="Vendors" design="Bold"/>
+                                                    <core:Icon src="sap-icon://supplier" class="kpiIcon"/>
+                                                </HBox>
+                                                <Text text="{kpi>/vendors}" class="kpiValue"/>
+                                            </VBox>
+                                            <VBox class="kpiCompactCard">
+
+    <Label
+        text="Warranty Alerts"
+        design="Bold"/>
+
+    <ObjectStatus
+        text="Expiring Soon : {warranty>/expiringSoon}"
+        state="Warning"/>
+
+    <ObjectStatus
+        text="Expired : {warranty>/expired}"
+        state="Error"/>
+
+</VBox>
+<GenericTile
+    header="Maintenance">
+
+    <TileContent>
+
+        <VBox>
+
+            <ObjectStatus
+                text="Open: {maintenance>/open}"
+                state="Error"/>
+
+            <ObjectStatus
+                text="In Progress: {maintenance>/inProgress}"
+                state="Warning"/>
+
+            <ObjectStatus
+                text="Completed: {maintenance>/completed}"
+                state="Success"/>
+
+        </VBox>
+
+    </TileContent>
+
+</GenericTile>
+                                        </items>
+                                    </HBox>
+                                    <HBox
+    width="100%"
+    justifyContent="SpaceBetween"
+    renderType="Bare">
+
+    <!-- Asset Status Donut Chart -->
+    <Panel
+        id="assetStatusPane"
+        headerText="Asset Status Overview"
+        expandable="true"
+        expanded="true"
+        width="49%">
+
+        <content>
+
+            <viz:VizFrame
+                id="assetStatusChart"
+                vizType="donut"
+                width="100%"
+                height="350px"
+                uiConfig="{applicationSet:'fiori'}"
+                vizProperties="{title: {visible: false}}">
+
+                <viz:dataset>
+                    <viz.data:FlattenedDataset
+                        data="{chart>/items}">
+
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition
+                                name="Status"
+                                value="{chart>Status}" />
+                        </viz.data:dimensions>
+
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition
+                                name="Count"
+                                value="{chart>Count}" />
+                        </viz.data:measures>
+
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+
+                <viz:feeds>
+
+                    <viz.feeds:FeedItem
+                        uid="size"
+                        type="Measure"
+                        values="Count"/>
+
+                    <viz.feeds:FeedItem
+                        uid="color"
+                        type="Dimension"
+                        values="Status"/>
+
+                </viz:feeds>
+
+            </viz:VizFrame>
+
+        </content>
+
+    </Panel>
+
+    <!-- Department Chart -->
+    <Panel
+        id="departmentPane"
+        headerText="Assets by Department"
+        expandable="true"
+        expanded="true"
+        width="49%">
+
+        <content>
+
+            <viz:VizFrame
+    id="deptChart"
+    vizType="bar"
+    width="100%"
+    height="400px"
+    uiConfig="{applicationSet:'fiori'}"
+    vizProperties="{title: {visible: false}}">
+
+    <viz:dataset>
+        <viz.data:FlattenedDataset
+            data="{deptChart>/}">
+
+            <viz.data:dimensions>
+                <viz.data:DimensionDefinition
+                    name="Department"
+                    value="{deptChart>department}" />
+            </viz.data:dimensions>
+
+            <viz.data:measures>
+                <viz.data:MeasureDefinition
+                    name="Assets"
+                    value="{deptChart>count}" />
+            </viz.data:measures>
+
+        </viz.data:FlattenedDataset>
+    </viz:dataset>
+    <viz:feeds>
+
+        <viz.feeds:FeedItem
+            uid="valueAxis"
+            type="Measure"
+            values="Assets"/>
+
+        <viz.feeds:FeedItem
+            uid="categoryAxis"
+            type="Dimension"
+            values="Department"/>
+
+    </viz:feeds>
+
+</viz:VizFrame>
+        </content>
+
+    </Panel>
+
+</HBox>
+                                </content>
+                            </Page>
+
+                            <!-- PAGE 2: Asset List Report Page -->
+                            <Page id="assetListPage" title="Asset List Report" showHeader="true">
+                                <content>
+                                    <Table id="assetTable" items="{/Assets}">
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <Title text="Registered Assets Inventory"/>
+                                                <ToolbarSpacer/>
+                                                <SearchField
+    placeholder="Search assets..."
+    width="20rem"
+    liveChange="onAssetSearch"/>
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column><Text text="Asset ID"/></Column>
+                                            <Column><Text text="Asset Name"/></Column>
+                                            <Column><Text text="Category"/></Column>
+                                            <Column><Text text="Status"/></Column>
+                                            <Column><Text text="Assigned User"/></Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Text text="{ID}"/>
+                                                    <Text text="{name}"/>
+                                                    <Text text="{category}"/>
+                                                    <ObjectStatus
+    text="{status}"
+    state="{
+        path:'status',
+        formatter:'.formatStatusState'
+    }"/>
+                                                    <Text text="{assignedTo}"/>
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </content>
+                            </Page>
+
+                            <!-- PAGE 3: Maintenance Details Report Page -->
+                            <Page id="maintenanceListPage" title="Maintenance Details" showHeader="true">
+                                <content>
+                                    <Table id="maintenanceTable" items="{/Maintenance}">
+                                        <headerToolbar>
+                                            <OverflowToolbar>
+                                                <Title text="Maintenance Log"/>
+                                            </OverflowToolbar>
+                                        </headerToolbar>
+                                        <columns>
+                                            <Column><Text text="Ticket ID"/></Column>
+                                            <Column><Text text="Asset"/></Column>
+                                            <Column><Text text="Issue Description"/></Column>
+                                            <Column><Text text="Priority"/></Column>
+                                            <Column><Text text="Repair Status"/></Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem>
+                                                <cells>
+                                                    <Text text="{ticketID}"/>
+                                                    <Text text="{assetName}"/>
+                                                    <Text text="{description}"/>
+                                                    <ObjectStatus
+    text="{priority}"
+    state="{
+        path:'priority',
+        formatter:'.formatPriorityState'
+    }"/>
+                                                    <Text text="{repairStatus}"/>
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </content>
+                            </Page>
+
+                        </pages>
+                    </NavContainer>
+
+                </layout:contentAreas>
+            </layout:Splitter>
+
+        </content>
+    </Page>
+
+</mvc:View>

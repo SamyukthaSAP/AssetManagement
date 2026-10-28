@@ -1,0 +1,144 @@
+/* Enter your custom styles here *//* Tightens the gap between the cards and makes them look neat */
+.sapMTitle {
+    font-size: 1.8rem !important;
+    font-weight: 700 !important;
+    color: #1d1d1f !important;
+}
+.kpiCompactCard {
+    background: rgba(255,255,255,0.9);
+    border-radius: 18px;
+    border: none;
+
+    box-shadow:
+        0 4px 20px rgba(0,0,0,0.08),
+        0 1px 3px rgba(0,0,0,0.05);
+
+    padding: 18px;
+    transition: all .25s ease;
+    padding: 10px 14px;
+    margin: 4px;
+    min-width: 120px;
+    flex: 1 1 11%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.kpiCompactCard:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.12);
+}
+
+/* KPI Number Typography */
+.kpiValue {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #0071e3;
+    font-weight: bold;
+    color: #0a6ed1;
+    margin-top: 4px;
+}
+
+/* Icon Styling */
+.kpiIcon {
+    font-size: 1rem;
+    color: #6a6d70;
+}
+
+.sidebarPanel {
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    height: 100vh; /* Lock height to the full viewport */
+    width: 250px;
+    min-width: 250px;
+    max-width: 250px;
+    position: sticky;
+    top: 0;
+    overflow-y: auto; /* Keeps sidebar independently scrollable if items exceed height */
+    padding-right: 8px;
+}
+
+/* Ensure the main page content fills the screen cleanly without outer page scrolls */
+.sapMPageContent {
+    overflow: hidden !important;
+}
+.sidebarPanel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbars for IE, Edge, and Firefox */
+.sidebarPanel {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+/* Hide all sidebar scrollbars */
+.sidebarPanel,
+.sidebarPanel .sapMPanelContent,
+.sidebarPanel .sapMScrollCont,
+.sidebarPanel .sapMNav {
+    overflow: hidden !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebarPanel::-webkit-scrollbar,
+.sidebarPanel *::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+.sapMPage {
+    background: #f5f5f7 !important;
+}
+.totalAssets .kpiValue {
+    color: #0071e3;
+}
+
+.assignedAssets .kpiValue {
+    color: #34c759;
+}
+
+.repairAssets .kpiValue {
+    color: #ff9500;
+}
+
+.retiredAssets .kpiValue {
+    color: #ff3b30;
+}
+
+.archivedAssets .kpiValue {
+    color: #8e8e93;
+}
+.sapMLIBSelected {
+    background: linear-gradient(
+        135deg,
+        #0071e3,
+        #4da3ff
+    ) !important;
+
+    color: white !important;
+
+    border-radius: 12px;
+}
+.sapMLIB {
+    border-radius: 12px;
+    margin-bottom: 6px;
+}
+.kpiCompactCard {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    background:
+        rgba(255,255,255,0.75);
+}
+
+/* Remove scrollbar from the left (navigation) splitter area only */
+.fixedSplitter > .sapUiLoSplitterContent:first-of-type {
+    overflow: hidden !important;
+}
+
+/* Slightly tighter nav items so all 10 fit without needing scroll */
+.sidebarPanel .sapMLIB {
+    height: 2.5rem;
+}
+.warrantyTile {
+    border-left: 5px solid #f0ab00;
+}

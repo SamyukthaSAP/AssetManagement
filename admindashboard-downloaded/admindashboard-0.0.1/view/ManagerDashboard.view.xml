@@ -1,0 +1,188 @@
+<mvc:View
+    controllerName="admindashboard.controller.AdminDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
+
+    <Page id="adminDashboardPage"
+    title="Manager Dashboard">
+    
+        <content>
+        <Text id="textmanager"
+        text="THIS IS MANAGER DASHBOARD"/>
+            <HBox id="kpiContainer"
+                justifyContent="SpaceAround"
+                wrap="Wrap">
+
+                <GenericTile id="tileTotalAssets"
+                header="Total Assets">
+                    <tileContent>
+                        <TileContent id="tileContentTotal">
+                            <content>
+                                <NumericContent id="numericTotalAssets"
+                                value="{kpi>/totalAssets}"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile id="tileAssignedAssets"
+                header="Assigned Assets">
+                    <tileContent>
+                        <TileContent id="TileAssigned">
+                            <content>
+                                <NumericContent id="numericAssigned"
+                                value="{kpi>/assignedAssets}"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile id="tileRepairAssets"
+                header="In Repair Assets">
+                    <tileContent>
+                        <TileContent id="tileRepair">
+                            <content>
+                                <NumericContent id="numericval"
+                                 value="{kpi>/repairAssets}"/>
+                            </content>
+                        </TileContent>
+                    </tileContent>
+                </GenericTile>
+
+                <GenericTile id="tileRetir" header="Retired">
+    <tileContent>
+        <TileContent id="tileContentRetire">
+            <content>
+                <NumericContent
+                    id="numericRetire"
+                    value="{kpi>/retiredAssets}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+
+<GenericTile id="tileArchived" header="Archived Assets">
+    <tileContent>
+        <TileContent id="tileContentArchived">
+            <content>
+                <NumericContent
+                    id="numericArchived"
+                    value="{kpi>/archivedAssets}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+<GenericTile id="tileEmployee" header="Active Employees">
+    <tileContent>
+        <TileContent id="tileEmp">
+            <content>
+                <NumericContent
+                    id="numericEmployee"
+                    value="{kpi>/employees}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+<GenericTile id="tileVendor" header="Vendors">
+    <tileContent>
+        <TileContent id="tileVend">
+            <content>
+                <NumericContent
+                    id="numericVendor"
+                    value="{kpi>/vendors}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+</GenericTile>
+<GenericTile
+    id="tileDepartments"
+    header="Departments">
+
+    <tileContent>
+        <TileContent id="tileContentDepartments">
+            <content>
+                <NumericContent
+                    id="numericDepartments"
+                    value="{kpi>/departments}"/>
+            </content>
+        </TileContent>
+    </tileContent>
+
+</GenericTile>
+
+            </HBox>
+
+        </content>
+        <Panel
+    id="assetStatusPanel"
+    headerText="Asset Status Overview"
+    expandable="true"
+    expanded="true">
+
+    <viz:VizFrame
+    id="assetStatusChart"
+    vizType="donut"
+    width="100%"
+    height="400px"/>
+
+</Panel>
+<Panel
+    id="departmentPanel"
+    headerText="Assets by Department">
+
+    <viz:VizFrame
+    id="departmentChart"
+    vizType="column"
+    width="100%"
+    height="400px"/>
+
+</Panel>
+<Panel
+    id="categoryPanel"
+    headerText="Assets by Category"
+    expandable="true"
+    expanded="true">
+
+    <Text id="textcha"
+    text="Category Chart Coming Soon"/>
+
+</Panel>
+<Panel
+    id="maintenancePanel"
+    headerText="Maintenance Status"
+    expandable="true"
+    expanded="true">
+
+    <Text id="Tectsvj"
+    text="Maintenance Status Chart Coming Soon"/>
+
+</Panel>
+<Panel
+    id="reportPanel"
+    headerText="Reports  &amp; Export"
+    expandable="true"
+    expanded="true">
+
+    <VBox id="Vboc">
+
+        <Button id="Bii"
+            text="Export Report PDF"
+            press=".onExportPDF"/>
+
+        <Button id="hi"
+            text="Download Report"
+            press=".onDownloadReport"/>
+
+        <Button id="ksjhd"
+            text="Email Report"
+            press=".onEmailReport"/>
+
+    </VBox>
+
+</Panel>
+    </Page>
+
+</mvc:View>
