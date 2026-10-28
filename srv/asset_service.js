@@ -1,3 +1,4 @@
+//service.js for handling actions and functions
 module.exports=cds.service.impl(async function () {
     const {
         EmployeeSrv,
@@ -11,18 +12,19 @@ module.exports=cds.service.impl(async function () {
         AssetAssignmentSrv
     }=this.entities
 
-    this.on('whoAmI', req => {
-    return {
-        user: req.user.id,
-        roles: [...req.user.roles]
-    }
-    })
+    // this.on('whoAmI', req => {
+    // return {
+    //     user: req.user.id,
+    //     roles: [...req.user.roles]
+    // }
+    // })
 
-    this.before('*', req => {
-  console.log('USER:', req.user.id);
-  console.log('ROLES:', req.user.roles);
-});
+//     this.before('*', req => {
+//   console.log('USER:', req.user.id);
+//   console.log('ROLES:', req.user.roles);
+// });
 
+    //handler for KPI's
     this.on('getDashboardKPIs', async () => {
 
         const totalAssets = await SELECT.one.from(AssetSrv)
@@ -65,25 +67,10 @@ module.exports=cds.service.impl(async function () {
         };
     });
 
-    this.on('getAssetsByDepartment', async () => {
+    //handler for department-asset chart
+    //is in admindashboard.controller.js
 
-    return [
-        {
-            department: "IT",
-            count: 5
-        },
-        {
-            department: "Finance",
-            count: 3
-        },
-        {
-            department: "HR",
-            count: 2
-        }
-    ];
-
-});
-
+    //calculating status critcality
     this.after('READ', AssetSrv, (data) => {
 
             const assets = Array.isArray(data) ? data : [data];
@@ -194,6 +181,7 @@ module.exports=cds.service.impl(async function () {
         }
     });
 
+    //what happens after assigning an asset
     this.after('assignAsset', async (data) => {
 
         await UPDATE(AssetSrv)
@@ -363,6 +351,7 @@ module.exports=cds.service.impl(async function () {
         }
     });
 
+    //after creating maintenance
     this.after('createMaintenance', async (data) => {
 
         await UPDATE(AssetSrv)
@@ -495,6 +484,7 @@ module.exports=cds.service.impl(async function () {
         }
     });
 
+    //after creating an archive
     this.after('createArchive', async (data) => {
         await UPDATE(AssetSrv)
             .set({
