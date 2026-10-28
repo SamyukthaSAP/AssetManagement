@@ -1,22 +1,17 @@
-# Getting Started
+# IT Asset Lifecycle Manager
 
-Welcome to your new CAP project.
+Welcome, this is SAP CAPM with FIORI based project.
 
-It contains these folders and files, following our recommended project layout:
+Organizations often struggle to track hardware assets throughout their lifecycle. Assets may be misplaced, reassigned without records, not returned during employee offboarding, or retired without proper documentation. 
+
+The IT Asset Lifecycle Manager provides a centralized system to manage assets from procurement through 
+assignment, maintenance, retirement, and archival. 
+It ensures complete visibility, accountability, and auditability of IT assets across the organization.
+
+It contains these folders and files, following CAPM with Fiori project layout
 
 File or Folder | Purpose
 ---------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`readme.md` | this getting started guide
-
-## Next Steps
-
-- Open a new terminal and run `cds watch`
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start with your domain model, in a CDS file in `db/`
-
-## Learn More
-
-Learn more at <https://cap.cloud.sap>.
+`app/` | content for UI frontends
+`db/` | domain models and data
+`srv/` | service models and code
