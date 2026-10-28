@@ -1,0 +1,145 @@
+<mvc:View
+    controllerName="admindashboard.controller.UserDashboard"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="User Dashboard">
+
+        <content>
+
+            <Panel headerText="Employee Details"
+    class="sapUiMediumMargin">
+
+    <HBox justifyContent="SpaceBetween">
+
+        <!-- Employee Details -->
+        <VBox class="sapUiSmallMargin">
+
+            <Text text="Employee ID: {employee>/employee_id}" />
+            <Text text="Name: {employee>/full_name}" />
+            <Text text="Email: {employee>/email}" />
+            <Text text="Phone: {employee>/phone}" />
+            <Text text="Location: {employee>/location}" />
+            <Text text="Status: {employee>/status}" />
+
+        </VBox>
+
+        <!-- KPI Card -->
+        <GenericTile
+            header="Assigned Assets"
+            class="sapUiSmallMargin">
+
+            <TileContent>
+                <NumericContent
+                    value="{kpi>/assetCount}" />
+            </TileContent>
+
+        </GenericTile>
+
+    </HBox>
+
+</Panel>
+
+            <Panel headerText="Department Details"
+                class="sapUiMediumMargin">
+
+                <VBox class="sapUiSmallMargin">
+
+                    <Text text="Department: {department>/name}" />
+<Text text="Cost Center: {department>/cost_center}" />
+
+                </VBox>
+
+            </Panel>
+
+            <Panel headerText="Assigned Assets"
+                class="sapUiMediumMargin">
+
+                <Table items="{assets>/assets}">
+
+    <columns>
+        <Column>
+            <Text text="Asset Tag"/>
+        </Column>
+
+        <Column>
+            <Text text="Model"/>
+        </Column>
+
+        <Column>
+            <Text text="Status"/>
+        </Column>
+
+        <Column>
+            <Text text="Assigned Date"/>
+        </Column>
+    </columns>
+
+    <items>
+        <ColumnListItem>
+            <cells>
+
+                <Text text="{assets>asset_tag}" />
+                <Text text="{assets>model}" />
+                <Text text="{assets>status}" />
+                <Text text="{assets>assigned_date}" />
+
+            </cells>
+        </ColumnListItem>
+    </items>
+
+</Table>
+
+            </Panel>
+            <Panel
+    headerText="Assignment History"
+    class="sapUiMediumMargin">
+
+    <Table items="{history>/history}">
+
+        <columns>
+
+            <Column>
+                <Text text="Asset"/>
+            </Column>
+
+            <Column>
+                <Text text="Assigned Date"/>
+            </Column>
+
+            <Column>
+                <Text text="Return Date"/>
+            </Column>
+
+            <Column>
+                <Text text="Status"/>
+            </Column>
+
+        </columns>
+
+        <items>
+
+            <ColumnListItem>
+
+                <cells>
+
+                    <Text text="{history>asset_asset_id}" />
+                    <Text text="{history>assigned_date}" />
+                    <Text text="{history>actual_return_date}" />
+                    <Text text="{history>assignment_status}" />
+
+                </cells>
+
+            </ColumnListItem>
+
+        </items>
+
+    </Table>
+
+</Panel>
+
+        </content>
+
+    </Page>
+
+</mvc:View>

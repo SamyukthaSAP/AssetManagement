@@ -3,8 +3,8 @@
 POST http://localhost:4004/odata/v4/asset-admin/whoAmI
 
 
-content
-GET http://localhost:4004/odata/v4/asset-management/EmployeeSrv?$expand=dept
+###
+GET http://localhost:4004/odata/v4/asset-user/EmployeeSrv?$expand=dept
 
 ###
 GET http://localhost:4004/odata/v4/asset-management/DepartmentSrv

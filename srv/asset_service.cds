@@ -258,6 +258,8 @@ service AssetUserService @(requires:'User') {
     entity AssetSrv as projection on database.master.Assets;
     entity AssetAssignmentSrv as projection on database.transactional.AssetAssignments;
     entity OwnershipLedgerSrv as projection on database.transactional.OwnershipLedgers;
+    entity DepartmentSrv as projection on database.master.Departments;
+    entity EmployeeSrv as projection on database.master.Employees;
 }
 
 //Services for Manager specific roles

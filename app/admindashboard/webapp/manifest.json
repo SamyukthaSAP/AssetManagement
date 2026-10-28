@@ -109,11 +109,21 @@
   },
   "routes": [
     { "name": "RouteAdminDashboard",   "pattern": "",        "target": "TargetAdminDashboard" },
-    { "name": "RouteManagerDashboard", "pattern": "manager", "target": "TargetManagerDashboard" }
+    { "name": "RouteManagerDashboard", "pattern": "manager", "target": "TargetManagerDashboard" },
+    {
+  "pattern": "UserDashboard",
+  "name": "UserDashboard",
+  "target": "UserDashboard"
+}
   ],
   "targets": {
     "TargetAdminDashboard":   { "viewId": "AdminDashboard",   "viewName": "AdminDashboard" },
-    "TargetManagerDashboard": { "viewId": "ManagerDashboard", "viewName": "ManagerDashboard" }
+    "TargetManagerDashboard": { "viewId": "ManagerDashboard", "viewName": "ManagerDashboard" },
+    "UserDashboard": {
+  "viewId": "UserDashboard",
+  "viewName":"UserDashboard",
+  "viewType": "XML"
+}
   }
 },  
     "rootView": {
